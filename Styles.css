@@ -1,0 +1,225 @@
+/* GENERAL */
+
+/* Styling for whole page text. Colour is a dark grey. */
+* {
+    box-sizing: border-box;
+    font-family: Roboto;
+    color: #555;
+}
+
+/* Removes the white border around the website. */
+html, body {
+    margin: 0;
+    padding: 0;
+}
+
+/* Removes the margin at the top of the page. */
+.nav ul {
+    list-style-type: none;
+    margin: 0;
+}
+
+/* Header (top of the page) styling. */
+.main-header {
+    background-size: cover;
+    background-position-y: center;
+    background-color: #228116;
+    min-height: 300px;
+}
+
+/* Website title styling. */
+.page-title {
+    font-family: "Indie Flower", cursive;
+    text-align: center;
+    margin: 0;
+    font-size: 4.3em;
+    color: darkslategray;
+    padding-top: 1em;
+    animation: text-fade-in .5s ease-out .5s backwards;
+}
+
+.content-section {
+    margin: 1em;
+}
+
+/* Customises the main text margins and spacing. */
+.container {
+    max-width: 900px;
+    margin: 0 auto;
+    /* The first line makes the max width of the main text 900px, and the line below it makes that text stay in the centre. */
+    padding: 0 1.5em;
+}
+
+/* Styles for the in-page titles (e.g., Favourite Photo). */
+.section-header {
+    font-family: "Permanent Marker", cursive;
+    font-weight: normal;
+    color: #555;
+    text-align: center;
+    font-size: 2.2em;
+    margin-bottom: .1em;
+    margin-top: 1.3em;
+}
+
+/* Text fade animation. */
+@keyframes text-fade-in {
+    0% {
+        opacity: 0;
+        visibility: hidden;
+        transform: translate(0px, 15px);
+    }
+    100% {
+        opacity: 1;
+    }
+}
+
+/* Changes bottom margin colour and text. colour */
+.main-footer {
+    background-color: cornflowerblue;
+    color: white;
+    padding: .25em 0;
+}
+
+.main-footer-container {
+    display: flex;
+    align-items: center;
+}
+
+.main-footer-container ul {
+    flex-grow: 1;
+    text-align: end;
+}
+
+.footer-nav {
+    padding: 0 .5em;
+}
+
+/* Makes footer text display in a line. */
+.footer-nav li {
+    display: inline-block;
+}
+
+/* Footer header text styling. */
+.footer-title {
+    font-family: "Indie Flower", cursive;
+    font-size: 1.8em;
+}
+
+/* General button styling. */
+.button {
+    text-align: center;
+    vertical-align: middle;
+    padding: .67em;
+    cursor: pointer;
+}
+
+/* Fade in animation. | UNUSED */
+@keyframes fade-in {
+    0% {
+        opacity: 0;
+        visibility:hidden;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+
+/* Styling for descriptions. */
+.description {
+
+}
+
+/* General image styling. | UNUSED */
+.image {
+    max-width: 500px;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* SCROLL BAR */
+
+/* width */
+::-webkit-scrollbar {
+    width: 10px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+    background: #f1f1f1;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+    background: #888;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+    background: #555;
+}
+
+/* NAVIGATION */
+
+/* Main navigation text styling. */
+.main-nav {
+    font-size: 1.3em;
+    font-weight: lighter;
+    /* Main navigation font styling. */
+    position: fixed;
+    background-color: white;
+}
+
+/* General nav text styling. */
+.nav a {
+    display: block;
+    padding: .3em;
+    text-decoration: none;
+}
+
+/* Nav hover styling. */
+.nav a:hover {
+    background-color: rgba(255, 255, 255, .3);
+}
+
+/* TEXT EDITOR */
+.editor {
+    height: 100%;
+    width: 100%;
+    outline: none;
+    padding: 15px;
+    background-color: rgba(0, 0, 0, 0.05);
+    border-radius: 0.5em;
+}
+
+.reset-button {
+    border: 1px solid transparent;
+    outline: none;
+    background-color: #f04f21;
+    color: white;
+    border-radius: 0.2em;
+    box-shadow: 1px 3px 4px #999;
+}
+
+.reset-button:hover {
+    background-color: #de491e;
+}
+
+.reset-button:active {
+    box-shadow: 1px 2px 8px #777 inset;
+}
+
+.reset-button:focus {
+    border: 1px solid #000;
+}
+
+.button-align {
+    margin-top: 1em;
+    display: flex;
+    justify-content: center;
+}
+
+/* Custom styling for the telling-word-highlighter editor. */
+.telling-words-editor {
+    
+}
