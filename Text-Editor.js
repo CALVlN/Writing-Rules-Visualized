@@ -1,13 +1,13 @@
 window.onload = function () {
-    if (localStorage.getItem('text-in-editor') !== null) {
-        document.getElementById('telling-words-editor').innerText = localStorage.getItem('text-in-editor');
+    if (localStorage.getItem("text-in-editor") !== null) {
+        document.getElementById("telling-words-editor").innerText = localStorage.getItem("text-in-editor");
     }
 
     document.addEventListener('keyup', function (e) {
-        localStorage.setItem('text-in-editor', document.getElementById('telling-words-editor').innerText);
+        localStorage.setItem("text-in-editor", document.getElementById("telling-words-editor").innerText);
 
         /* Find string length of the text in the telling words tool editor. */
-        var tellingWordsEditor = localStorage.getItem('text-in-editor');
+        var tellingWordsEditor = localStorage.getItem("text-in-editor");
         var result = tellingWordsEditor.replace(/\s/g, "");
         var length = result.length;
         console.log("Character count: " + length);
@@ -24,12 +24,34 @@ window.onbeforeunload = function () {
 }
 
 function clearText() {
+    /* Clears the text in the div. */
     document.getElementById("telling-words-editor").innerHTML = "";
+
+    /* Sets focus to the div. */
     document.getElementById("telling-words-editor").focus();
+
+    /* Sets the data saved on reload to what is in the div. */
+    localStorage.setItem("text-in-editor", document.getElementById("telling-words-editor").innerText);
+}
+
+function theTest() {
+    var textInEditor = localStorage.getItem("text-in-editor");
+    var resultsHighlighted = textInEditor.replace("the", "<span class='blue-highlight'>the</span>");
+    document.getElementById("telling-words-editor").innerHTML = resultsHighlighted;
+
+    /* Sets the data saved on reload to the highlighted text. */
+    localStorage.setItem("text-in-editor", document.getElementById("telling-words-editor").innerText);
+
+    /*
+    var tellingWordsEditor = localStorage.getItem('text-in-editor');
+    var result = tellingWordsEditor.replace(/\s/g, "");
+    */
 }
 
 
-/* HOW DO IT WORK???////// */
+
+
+/* HOW DO IT WORK???//////
 function theTest() {
     let the = document.getElementsById("telling-words-editor");
     let i;
@@ -42,4 +64,4 @@ function theTest() {
 
         the.innerHTML = text;
     }
-}
+}*/
