@@ -1,16 +1,16 @@
 window.onload = function () {
-    if (localStorage.getItem("text-in-editor") !== null) {
-        document.getElementById("telling-words-editor").innerText = localStorage.getItem("text-in-editor");
+    if (localStorage.getItem('text-in-editor') !== null) {
+        document.getElementById('telling-words-editor').innerHTML = localStorage.getItem('text-in-editor');
     }
 
     document.addEventListener('keyup', function (e) {
-        localStorage.setItem("text-in-editor", document.getElementById("telling-words-editor").innerText);
+        localStorage.setItem('text-in-editor', document.getElementById('telling-words-editor').innerHTML);
 
         /* Find string length of the text in the telling words tool editor. */
-        var tellingWordsEditor = localStorage.getItem("text-in-editor");
-        var result = tellingWordsEditor.replace(/\s/g, "");
+        var tellingWordsEditor = localStorage.getItem('text-in-editor');
+        var result = tellingWordsEditor.replace(/\s/g, '');
         var length = result.length;
-        console.log("Character count: " + length);
+        console.log('Character count: ' + length);
     });
 }
 
@@ -21,48 +21,47 @@ window.onbeforeunload = function () {
 
 function clearText() {
     /* Clears the text in the div. */
-    document.getElementById("telling-words-editor").innerHTML = "";
+    document.getElementById('telling-words-editor').innerHTML = '';
 
     /* Sets focus to the div. */
-    document.getElementById("telling-words-editor").focus();
+    document.getElementById('telling-words-editor').focus();
 
     /* Sets the data saved on reload to what is in the div. */
-    localStorage.setItem("text-in-editor", document.getElementById("telling-words-editor").innerText);
+    localStorage.setItem('text-in-editor', document.getElementById('telling-words-editor').innerHTML);
 }
 
 function theTest(array, value) {
-    var textInEditor = localStorage.getItem("text-in-editor");
-    var result;
+    var textInEditor = document.getElementById('telling-words-editor').innerText;
+    var theLocations;
+    var result = '';
+    
+    var tokenized = tokenize(textInEditor, { word: /\w+/, whitespace: /\s+/, punctuation: /[^\w\s]/ }, 'invalid');
 
-    /* This line takes all the text in the text editor div and converts it into an array. */
-    var textInArray = textInEditor.split(" ");
+    /* This line gets the position of every instance of the word 'the' in an array and stores them in the variable result. */
+    theLocations = getAllIndexes(tokenized, 'the');
 
-    /* This line gets the position of every instance of the word "the" in an array and stores them in the variable result. */
-    result = getAllIndexes(textInArray, "the");
+    /* This line makes whatever this is into a string. */
+    tokenized.forEach(function (tokenObject, index) {
+        if (theLocations.includes(index)) {
+            result += '<span class="blue-highlight">' + tokenObject.token + '</span>';
+        }
+        else {
+            result += tokenObject.token;
+        }
+    });
+    /* This line replaces the div text with the result variable. */
+    document.getElementById('telling-words-editor').innerHTML = result;
+    /* This line sets the data saved on reload to the results variable.*/
+    localStorage.setItem('text-in-editor', document.getElementById('telling-words-editor').innerHTML);
 
-    /* This line takes the array called "result" and makes it into a string. */
-    /*result = textInArray.join(" ");*/
-
-    console.log(textInArray);
+    console.log(theLocations);
     console.log(result);
-
-
-
-
-
-    /* This code replaces the div text with the resultsHighlighted variable.
-    document.getElementById("telling-words-editor").innerHTML = resultsHighlighted;
-    */
-
-    /* Sets the data saved on reload to the highlighted text.
-    localStorage.setItem("text-in-editor", document.getElementById("telling-words-editor").innerText);
-    */
 }
 
 function getAllIndexes(array, value) {
     var indexes = [], i;
     for (i = 0; i < array.length; i++)
-        if (array[i] === value)
+        if (array[i].token.toUpperCase() === value.toUpperCase())
             indexes.push(i);
     return indexes;
 }
@@ -75,7 +74,7 @@ function getAllIndexes(array, value) {
  * - Returns an array of token objects
  *
  * tokenize('this is text.', { word:/\w+/, whitespace:/\s+/, punctuation:/[^\w\s]/ }, 'invalid');
- * result => [{ token="this", type="word" },{ token=" ", type="whitespace" }, Object { token="is", type="word" }, ... ]
+ * result => [{ token='this', type='word' },{ token=' ', type='whitespace' }, Object { token='is', type='word' }, ... ]
  * 
  */
 function tokenize(s, parsers, deftok) {
