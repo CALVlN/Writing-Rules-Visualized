@@ -6,11 +6,15 @@ window.onload = function () {
     document.addEventListener('keyup', function (e) {
         localStorage.setItem('text-in-editor', document.getElementById('telling-words-editor').innerHTML);
 
-        /* Find string length of the text in the telling words tool editor. */
+        /* Find character count of everything in the telling-words editor except whitespace. */
         var tellingWordsEditor = localStorage.getItem('text-in-editor');
         var result = tellingWordsEditor.replace(/\s/g, '');
         var length = result.length;
-        console.log('Character count: ' + length);
+        console.log('Innacurate character count: ' + length);
+
+        /* Call these functions on keyup. */
+        theTest();
+        fixCursorPosition();
     });
 }
 
@@ -30,15 +34,18 @@ function clearText() {
     localStorage.setItem('text-in-editor', document.getElementById('telling-words-editor').innerHTML);
 }
 
-function theTest(array, value) {
+function theTest() {
     var textInEditor = document.getElementById('telling-words-editor').innerText;
-    var theLocations;
+    var theLocations = [];
     var result = '';
+    var highlightedWords = ['the', 'locations', 'this'];
     
     var tokenized = tokenize(textInEditor, { word: /\w+/, whitespace: /\s+/, punctuation: /[^\w\s]/ }, 'invalid');
 
-    /* This line gets the position of every instance of the word 'the' in an array and stores them in the variable result. */
-    theLocations = getAllIndexes(tokenized, 'the');
+/* This stores the position of every word that will be highlighted in an array. */
+    highlightedWords.forEach(function (word) {
+        theLocations = theLocations.concat(getAllIndexes(tokenized, word));
+    });
 
     /* This line makes whatever this is into a string. */
     tokenized.forEach(function (tokenObject, index) {
@@ -49,13 +56,21 @@ function theTest(array, value) {
             result += tokenObject.token;
         }
     });
-    /* This line replaces the div text with the result variable. */
+    /* This line replaces the div text with the result variable. NOTE: If the result variable has a space at the end, that is not translated into the div. */
     document.getElementById('telling-words-editor').innerHTML = result;
     /* This line sets the data saved on reload to the results variable.*/
     localStorage.setItem('text-in-editor', document.getElementById('telling-words-editor').innerHTML);
 
-    console.log(theLocations);
+    /*console.log(theLocations);*/
     console.log(result);
+}
+
+/* NOTE: This is only a temporary solution. Every time you type a character, the cursor is teleported to the end of the text. */
+function fixCursorPosition() {
+    // select all the content in the element
+    document.execCommand('selectAll', false, null);
+    // collapse selection to the end
+    document.getSelection().collapseToEnd();
 }
 
 function getAllIndexes(array, value) {
