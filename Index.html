@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html>
 	<head>
 		<title>Writing Rules Visualized | Home</title>
@@ -37,12 +37,16 @@
 		</header>
 		<section class="content-section container">
 			<h2 class="section-header">Telling Words Highlighter</h2>
-			<div autofocus contenteditable="true" id="telling-words-editor" class="editor telling-words-editor">
+			<div autofocus contenteditable="true" id="telling-words-editor" class="editor">
 
 			</div>
 			<div class="button-align"><button class="button reset-button" type="button" onclick="clearText()">CLEAR TEXT</button></div>
-			<div class="button-align"><button class="button" type="button" onclick="theTest()">The Lighter</button></div>
+			<div class="button-align"><button class="button" type="button" onclick="highlightWords()">The Lighter</button></div>
 			<!-- Telling-words text editor. -->
+			<div id="highlighted-words" class="highlighted-words">
+				
+			</div>
+			<!-- Highlighted words div. -->
 			<h2 class="section-header">Other Tools</h2>
 			<div>
 				<div class="game-row">

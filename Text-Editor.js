@@ -1,6 +1,8 @@
 window.onload = function () {
     if (localStorage.getItem('text-in-editor') !== null) {
         document.getElementById('telling-words-editor').innerHTML = localStorage.getItem('text-in-editor');
+        /* FIX THIS #1 */
+        fixCursorPositionOnLoad();
     }
 
     document.addEventListener('keyup', function (e) {
@@ -13,8 +15,7 @@ window.onload = function () {
         console.log('Innacurate character count: ' + length);
 
         /* Call these functions on keyup. */
-        theTest();
-        fixCursorPosition();
+        highlightWords();
     });
 }
 
@@ -34,43 +35,44 @@ function clearText() {
     localStorage.setItem('text-in-editor', document.getElementById('telling-words-editor').innerHTML);
 }
 
-function theTest() {
+/* FIX THIS #1 */
+/* Fix the cursor position in the editable div element when the page loads. */
+function fixCursorPositionOnLoad() {
+    // select all the content in the element
+    document.execCommand('selectAll', false, null);
+    // collapse selection to the end
+    document.getSelection().collapseToEnd();
+}
+
+function highlightWords() {
     var textInEditor = document.getElementById('telling-words-editor').innerText;
-    var theLocations = [];
+    var locationsOfWords = [];
     var result = '';
-    var highlightedWords = ['the', 'locations', 'this'];
+    var highlightTheseWords = ['the', 'locations', 'this'];
     
     var tokenized = tokenize(textInEditor, { word: /\w+/, whitespace: /\s+/, punctuation: /[^\w\s]/ }, 'invalid');
-
+    
 /* This stores the position of every word that will be highlighted in an array. */
-    highlightedWords.forEach(function (word) {
-        theLocations = theLocations.concat(getAllIndexes(tokenized, word));
+    highlightTheseWords.forEach(function (word) {
+        locationsOfWords = locationsOfWords.concat(getAllIndexes(tokenized, word));
     });
 
     /* This line makes whatever this is into a string. */
     tokenized.forEach(function (tokenObject, index) {
-        if (theLocations.includes(index)) {
-            result += '<span class="blue-highlight">' + tokenObject.token + '</span>';
+        if (locationsOfWords.includes(index)) {
+            result += '<b class="general-highlight">' + tokenObject.token + '</b>';
         }
         else {
             result += tokenObject.token;
         }
     });
-    /* This line replaces the div text with the result variable. NOTE: If the result variable has a space at the end, that is not translated into the div. */
-    document.getElementById('telling-words-editor').innerHTML = result;
+    /* This line replaces the div text with the result variable. NOTE: If the result variable has white space at the end, that is not translated into the div. */
+    document.getElementById('highlighted-words').innerHTML = result;
     /* This line sets the data saved on reload to the results variable.*/
     localStorage.setItem('text-in-editor', document.getElementById('telling-words-editor').innerHTML);
 
-    /*console.log(theLocations);*/
+    /*console.log(locationsOfWords);*/
     console.log(result);
-}
-
-/* NOTE: This is only a temporary solution. Every time you type a character, the cursor is teleported to the end of the text. */
-function fixCursorPosition() {
-    // select all the content in the element
-    document.execCommand('selectAll', false, null);
-    // collapse selection to the end
-    document.getSelection().collapseToEnd();
 }
 
 function getAllIndexes(array, value) {
@@ -81,7 +83,6 @@ function getAllIndexes(array, value) {
     return indexes;
 }
 
-/* This probably does something useful. */
 /*
  * Tiny tokenizer
  *

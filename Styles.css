@@ -219,17 +219,16 @@ html, body {
     justify-content: center;
 }
 
-/* Custom styling for the telling-word-highlighter editor. */
-.telling-words-editor {
-    
+/* Custom styling for the telling-word-highlighter tool. */
+.highlighted-words {
+    padding: .5em;
+    margin-top: 1em;
+    border-left: solid 4px #3498db;
+    background-color: #f0f7fb;
+    min-height: 2.2em;
 }
-
-/* HIGHLIGHT COLOURS */
-
-.blue-highlight {
-    background-color: lightblue;
-}
-
-.green-highlight {
-    background-color: lightgreen;
+/* HIGHLIGHT COLOURS ; */
+.general-highlight {
+    text-decoration: underline;
+    text-decoration-color: red;
 }
