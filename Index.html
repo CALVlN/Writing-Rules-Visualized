@@ -37,30 +37,23 @@
 		</header>
 		<section class="content-section container">
 			<h2 class="section-header">Telling Words Highlighter</h2>
+			<!-- Editable words to highlight div. -->
+			<h3 class="">Words To Highlight</h3>
+			<div contenteditable="true" id="words-to-highlight-div" class="words-to-highlight-div">
+
+			</div>
+			<!-- Telling-words text editor. -->
+			<h3 class="">Input</h3>
 			<div autofocus contenteditable="true" id="telling-words-editor" class="editor">
 
 			</div>
-			<div class="button-align"><button class="button reset-button" type="button" onclick="clearText()">CLEAR TEXT</button></div>
-			<div class="button-align"><button class="button" type="button" onclick="highlightWords()">The Lighter</button></div>
-			<!-- Telling-words text editor. -->
-			<div id="highlighted-words" class="highlighted-words">
-				
-			</div>
+			<div class="button-align"><button class="button save-button" type="button" onclick="saveText()">Save</button></div>
+			<div class="button-align"><button class="button load-button" type="button" onclick="loadText()">Load</button></div>
 			<!-- Highlighted words div. -->
-			<h2 class="section-header">Other Tools</h2>
-			<div>
-				<div class="game-row">
-					<h4 class="game-name">Coming Later Possibly</h4>
-					<div class="description">A stealth game that has nothing to do with stalkers.</div>
-					<button type="button" class="button">LINK</button>
-				</div>
-				<div class="game-row">
-					<h4 class="game-name">Possibly Coming Later</h4>
-					<div class="description">Pacman Tetris Pong Joust Montezuma Myst</div>
-					<button type="button" class="button">GAME PAGE</button>
-				</div>
+			<h3 class="">Output</h3>
+			<div id="highlighted-words" class="highlighted-words">
+
 			</div>
-			<!-- Just some list placeholder stuff. -->
 		</section>
 		<footer class="main-footer">
 			<div class="container main-footer-container">
