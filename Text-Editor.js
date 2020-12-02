@@ -99,7 +99,6 @@ function highlightWords() {
     
     var tokenized = tokenize(textInEditor, { word: /\w+/, whitespace: /\s+/, punctuation: /[^\w\s]/ }, 'invalid');
 
-    /* DEBUGGING CODE */
     highlightTheseWords = wordsToHighlight();
 
 /* This stores the position of every word that will be highlighted in an array. */
